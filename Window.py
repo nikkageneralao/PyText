@@ -19,7 +19,7 @@ class Window:
 
         # Initialisation Of window
         self.window = Tk()
-        self.window.geometry("1200x700+200+150")
+        self.window.geometry("1200x700+20+20")
         self.window.wm_title("PyText")
         p1 = PhotoImage(file='logo.png')
         self.window.iconphoto(False, p1)
@@ -30,24 +30,36 @@ class Window:
         # Initialisation of MenuBar
         self.menuBar = Menu(self.window, bg="#eeeeee", font=("Helvetica", 13), borderwidth=0)
         self.window.config(menu=self.menuBar)
+
         # File Menu
         self.fileMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2, font="Helvetica")
-        self.fileMenu.add_command(label="    New       Ctrl+N", command=self.new_file, )
-        self.fileMenu.add_command(label="    Open...      Ctrl+O", command=self.open_file)
-        self.fileMenu.add_command(label="    Save         Ctrl+S", command=self.retrieve_input)
+        self.newImage = PhotoImage(file="new.png")
+        self.openImage = PhotoImage(file="open.png")
+        self.saveImage = PhotoImage(file="save.png")
+        self.exit = PhotoImage(file="exit.png")
+        self.fileMenu.add_command(label=" New", accelerator="Ctrl+N", image=self.newImage, compound=LEFT, command=self.new_file)
+        self.fileMenu.add_command(label=" Open", accelerator="Ctrl+O", image=self.openImage, compound=LEFT, command=self.open_file)
+        self.fileMenu.add_command(label=" Save", accelerator="Ctrl+S", image=self.saveImage, compound=LEFT, command=self.retrieve_input)
         self.fileMenu.add_separator()
-        self.fileMenu.add_command(label="    Exit          Ctrl+D", command=self._quit)
-        self.menuBar.add_cascade(label="   File   ", menu=self.fileMenu)
+        self.fileMenu.add_command(label=" Exit", accelerator="Ctrl+D", image=self.exit, compound=LEFT, command=self._quit)
+        self.menuBar.add_cascade(label="File", menu=self.fileMenu)
+
         # Edit Menu
         self.editMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2,
                              font="Helvetica", )
-        self.editMenu.add_command(label="    Undo    Ctrl+Z", command=self.undo)
-        self.editMenu.add_command(label="    Redo    Ctrl+Shift+Z", command=self.redo)
+        self.undoImage = PhotoImage(file="undo.png")
+        self.redoImage = PhotoImage(file="redo.png")
+        self.cutImage = PhotoImage(file="cut.png")
+        self.copyImage = PhotoImage(file="copy.png")
+        self.pasteImage = PhotoImage(file="paste.png")
+        self.editMenu.add_command(label=" Undo", accelerator="Ctrl+Z", image=self.undoImage, compound=LEFT,command=self.undo)
+        self.editMenu.add_command(label=" Redo", accelerator="Ctrl+Shift+Z", image=self.redoImage, compound=LEFT, command=self.redo)
         self.editMenu.add_separator()
-        self.editMenu.add_command(label="    Cut    Ctrl+X", command=self.cut)
-        self.editMenu.add_command(label="    Copy    Ctrl+C", command=self.copy)
-        self.editMenu.add_command(label="    Paste   Ctrl+V", command=self.paste)
-        self.menuBar.add_cascade(label="   Edit   ", menu=self.editMenu)
+        self.editMenu.add_command(label=" Cut", accelerator="Ctrl+X", image=self.cutImage, compound=LEFT, command=self.cut)
+        self.editMenu.add_command(label=" Copy", accelerator="Ctrl+C", image=self.copyImage, compound=LEFT, command=self.copy)
+        self.editMenu.add_command(label=" Paste", accelerator="Ctrl+V", image=self.pasteImage, compound=LEFT, command=self.paste)
+        self.menuBar.add_cascade(label="Edit", menu=self.editMenu)
+
         # View Menu
         self.viewMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2,
                              font="Helvetica", )
@@ -259,3 +271,5 @@ class Window:
         text = self.TextBox.selection_get(selection='CLIPBOARD')
         self.TextBox.insert('insert', text)
         self.UStack.add(self.TextBox.get("1.0", "end-1c"))
+
+
