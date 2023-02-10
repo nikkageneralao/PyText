@@ -84,6 +84,7 @@ class Window:
         self.menuBar.add_cascade(label="   Help   ", menu=self.helpMenu)
 
         # Tool Bar
+        # Font
         self.toolBar = Label(self.window)
         self.toolBar.pack(side=TOP, fill=X)
         self.fontFamilies = font.families()
@@ -91,6 +92,11 @@ class Window:
         self.fontFamily_combobox = Combobox(self.toolBar, width=30, values=self.fontFamilies, state='readonly', textvariable=self.fontFamily_variable)
         self.fontFamily_combobox.current(self.fontFamilies.index('Arial'))
         self.fontFamily_combobox.grid(row=0, column=0)
+        # Font Size
+        self.fontSize_variable = IntVar
+        self.fontSize_combobox = Combobox(self.toolBar, width=14, textvariable=self.fontSize_variable, state='readonly', values=tuple(range(8,80)))
+        self.fontSize_combobox.current(4)
+        self.fontSize_combobox.grid(row=0, column=1)
         # Initialisation Of Stack Objects By Original state i.e if the file contains data, it is the Original state of
         # that file
         self.UStack = Stack(self.TextBox.get("1.0", "end-1c"))
