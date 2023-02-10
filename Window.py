@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import messagebox as message
 from tkinter import filedialog as fd
 from Stack import *
+from tkinter.ttk import *
+from tkinter import font
 
 
 #  Class Window is used for managing all the operations in TextEditor
@@ -42,7 +44,7 @@ class Window:
         self.fileMenu.add_command(label=" Save", accelerator="Ctrl+S", image=self.saveImage, compound=LEFT, command=self.retrieve_input)
         self.fileMenu.add_separator()
         self.fileMenu.add_command(label=" Exit", accelerator="Ctrl+D", image=self.exit, compound=LEFT, command=self._quit)
-        self.menuBar.add_cascade(label="File", menu=self.fileMenu)
+        self.menuBar.add_cascade(label="    File    ", menu=self.fileMenu)
 
         # Edit Menu
         self.editMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2,
@@ -67,19 +69,28 @@ class Window:
         self.editMenu.add_command(label=" Clear", accelerator="Ctrl+Alt+X", image=self.clearImage, compound=LEFT)
         self.editMenu.add_command(label=" Find", accelerator="Ctrl+F", image=self.findImage, compound=LEFT)
         self.editMenu.add_command(label=" Time/Date", accelerator="Ctrl+D", image=self.timedateImage, compound=LEFT)
-        self.menuBar.add_cascade(label="Edit", menu=self.editMenu)
+        self.menuBar.add_cascade(label="    Edit    ", menu=self.editMenu)
 
         # View Menu
         self.viewMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2,
                              font="Helvetica", )
         self.viewMenu.add_command(label="   Change Mode   ", command=self.change_color)
         self.menuBar.add_cascade(label="   View   ", menu=self.viewMenu)
+
         # Help Menu
         self.helpMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2,
                              font="Helvetica", )
         self.helpMenu.add_command(label="    About   ", command=self.about)
         self.menuBar.add_cascade(label="   Help   ", menu=self.helpMenu)
 
+        # Tool Bar
+        self.toolBar = Label(self.window)
+        self.toolBar.pack(side=TOP, fill=X)
+        self.fontFamilies = font.families()
+        self.fontFamily_variable = StringVar()
+        self.fontFamily_combobox = Combobox(self.toolBar, width=30, values=self.fontFamilies, state='readonly', textvariable=self.fontFamily_variable)
+        self.fontFamily_combobox.current(self.fontFamilies.index('Arial'))
+        self.fontFamily_combobox.grid(row=0, column=0)
         # Initialisation Of Stack Objects By Original state i.e if the file contains data, it is the Original state of
         # that file
         self.UStack = Stack(self.TextBox.get("1.0", "end-1c"))
