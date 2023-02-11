@@ -107,7 +107,7 @@ class Window:
         self.fontSize_combobox.bind('<<ComboboxSelected>>', self.font_Size)
         ## Bold Button
         self.boldImage = PhotoImage(file='bold.png')
-        self.boldButton = Button(self.toolBar, image=self.boldImage)
+        self.boldButton = Button(self.toolBar, image=self.boldImage, command=self.boldText)
         self.boldButton.grid(row=0, column=2, padx=5)
         ## Italic Button
         self.italicImage = PhotoImage(file='italic.png')
@@ -344,5 +344,14 @@ class Window:
         global fontSize
         self.fontSize = self.fontSize_variable.get()
         self.TextBox.config(font=(self.fontStyle, self.fontSize))
+
+    ## 18. Bold Text Feature
+    def boldText(self):
+        self.textProperty = font.Font(font=self.TextBox['font']).actual()
+        if self.textProperty['weight'] == 'normal':
+            self.TextBox.config(font=(self.fontStyle, self.fontSize, 'bold'))
+
+        if self.textProperty['weight'] == 'bold':
+            self.TextBox.config(font=(self.fontStyle, self.fontSize, 'normal'))
 
 
