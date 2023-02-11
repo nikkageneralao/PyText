@@ -97,14 +97,14 @@ class Window:
         self.fontFamily_combobox.current(self.fontFamilies.index('Arial'))
         self.fontFamily_combobox.grid(row=0, column=0, padx=5)
         ## Font Functionality
-        self.fontFamily_combobox.bind('<<ComboboxSelected>>', self.fontStyle)
+        self.fontFamily_combobox.bind('<<ComboboxSelected>>', self.font_Style)
         ## Font Size
         self.fontSize_variable = IntVar()
         self.fontSize_combobox = Combobox(self.toolBar, width=14, textvariable=self.fontSize_variable, state='readonly', values=tuple(range(8,80)))
         self.fontSize_combobox.current(4)
         self.fontSize_combobox.grid(row=0, column=1, padx=5)
         ## Font Size Functionality
-        self.fontSize_combobox.bind('<<ComboboxSelected>>', self.fontSize)
+        self.fontSize_combobox.bind('<<ComboboxSelected>>', self.font_Size)
         ## Bold Button
         self.boldImage = PhotoImage(file='bold.png')
         self.boldButton = Button(self.toolBar, image=self.boldImage)
@@ -335,13 +335,12 @@ class Window:
     ## 17. Font and Font Size Features
     fontSize = 12
     fontStyle = 'Arial'
-
-    def fontStyle(self, event):
+    def font_Style(self, event):
         global fontStyle
         self.fontStyle = self.fontFamily_variable.get()
         self.TextBox.config(font=(self.fontStyle, self.fontSize))
 
-    def fontSize(self, event):
+    def font_Size(self, event):
         global fontSize
         self.fontSize = self.fontSize_variable.get()
         self.TextBox.config(font=(self.fontStyle, self.fontSize))
