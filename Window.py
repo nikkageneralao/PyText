@@ -26,8 +26,12 @@ class Window:
         p1 = PhotoImage(file='logo.png')
         self.window.iconphoto(False, p1)
 
+        # Scrollbar
+        self.scrollBar = Scrollbar(self.window)
+        self.scrollBar.pack(side=RIGHT, fill=Y)
         # Initialisation of Text Widget
-        self.TextBox = Text(self.window, highlightthickness=0, font=("Helvetica", 14))
+        self.TextBox = Text(self.window, highlightthickness=0, font=("Arial", 12), yscrollcommand=self.scrollBar.set)
+        self.scrollBar.config(command=self.TextBox.yview)
 
         # Initialisation of MenuBar
         self.menuBar = Menu(self.window, bg="#eeeeee", font=("Helvetica", 13), borderwidth=0)
