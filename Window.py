@@ -136,18 +136,6 @@ class Window:
         self.UStack = Stack(self.TextBox.get("1.0", "end-1c"))
         self.RStack = Stack(self.TextBox.get("1.0", "end-1c"))
 
-    ## Font and Font Size Functionality
-    fontSize = 12
-    fontStyle = 'Arial'
-    def fontStyle(self, event):
-        global fontStyle
-        self.fontStyle = self.fontFamily_variable.get()
-        self.TextBox.config(font=(self.fontStyle, self.fontSize))
-    def fontSize(self, event):
-        global fontSize
-        self.fontSize = self.fontSize_variable.get()
-        self.TextBox.config(font=(self.fontStyle, self.fontSize))
-
     #     Member Functions
     # 1. New File method which creates a new file
     def new_file(self):
@@ -343,5 +331,19 @@ class Window:
         text = self.TextBox.selection_get(selection='CLIPBOARD')
         self.TextBox.insert('insert', text)
         self.UStack.add(self.TextBox.get("1.0", "end-1c"))
+
+    ## 17. Font and Font Size Features
+    fontSize = 12
+    fontStyle = 'Arial'
+
+    def fontStyle(self, event):
+        global fontStyle
+        self.fontStyle = self.fontFamily_variable.get()
+        self.TextBox.config(font=(self.fontStyle, self.fontSize))
+
+    def fontSize(self, event):
+        global fontSize
+        self.fontSize = self.fontSize_variable.get()
+        self.TextBox.config(font=(self.fontStyle, self.fontSize))
 
 
