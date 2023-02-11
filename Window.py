@@ -88,7 +88,7 @@ class Window:
         self.menuBar.add_cascade(label="   Help   ", menu=self.helpMenu)
 
         ## Tool Bar
-        ## Font
+        ## Font Button
         self.toolBar = Label(self.window)
         self.toolBar.pack(side=TOP, fill=X)
         self.fontFamilies = font.families()
@@ -96,11 +96,15 @@ class Window:
         self.fontFamily_combobox = Combobox(self.toolBar, width=30, values=self.fontFamilies, state='readonly', textvariable=self.fontFamily_variable)
         self.fontFamily_combobox.current(self.fontFamilies.index('Arial'))
         self.fontFamily_combobox.grid(row=0, column=0, padx=5)
+        ## Font Functionality
+        self.fontFamily_combobox.bind('<<ComboboxSelected>>', self.fontStyle)
         ## Font Size
-        self.fontSize_variable = IntVar
+        self.fontSize_variable = IntVar()
         self.fontSize_combobox = Combobox(self.toolBar, width=14, textvariable=self.fontSize_variable, state='readonly', values=tuple(range(8,80)))
         self.fontSize_combobox.current(4)
         self.fontSize_combobox.grid(row=0, column=1, padx=5)
+        ## Font Size Functionality
+        self.fontSize_combobox.bind('<<ComboboxSelected>>', self.fontSize)
         ## Bold Button
         self.boldImage = PhotoImage(file='bold.png')
         self.boldButton = Button(self.toolBar, image=self.boldImage)
@@ -131,6 +135,18 @@ class Window:
         # that file
         self.UStack = Stack(self.TextBox.get("1.0", "end-1c"))
         self.RStack = Stack(self.TextBox.get("1.0", "end-1c"))
+
+    ## Font and Font Size Functionality
+    fontSize = 12
+    fontStyle = 'Arial'
+    def fontStyle(self, event):
+        global fontStyle
+        self.fontStyle = self.fontFamily_variable.get()
+        self.TextBox.config(font=(self.fontStyle, self.fontSize))
+    def fontSize(self, event):
+        global fontSize
+        self.fontSize = self.fontSize_variable.get()
+        self.TextBox.config(font=(self.fontStyle, self.fontSize))
 
     #     Member Functions
     # 1. New File method which creates a new file
