@@ -26,7 +26,7 @@ class Window:
         p1 = PhotoImage(file='logo.png')
         self.window.iconphoto(False, p1)
 
-        # Scrollbar
+        ## Scrollbar
         self.scrollBar = Scrollbar(self.window)
         self.scrollBar.pack(side=RIGHT, fill=Y)
         # Initialisation of Text Widget
@@ -37,7 +37,7 @@ class Window:
         self.menuBar = Menu(self.window, bg="#eeeeee", font=("Helvetica", 13), borderwidth=0)
         self.window.config(menu=self.menuBar)
 
-        # File Menu
+        ## File Menu (added icons images)
         self.fileMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2, font="Helvetica")
         self.newImage = PhotoImage(file="new.png")
         self.openImage = PhotoImage(file="open.png")
@@ -50,7 +50,7 @@ class Window:
         self.fileMenu.add_command(label=" Exit", accelerator="Ctrl+D", image=self.exit, compound=LEFT, command=self._quit)
         self.menuBar.add_cascade(label="    File    ", menu=self.fileMenu)
 
-        # Edit Menu
+        ## Edit Menu (added icons images and the select, clear, find and time/date features)
         self.editMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2,
                              font="Helvetica", )
         self.undoImage = PhotoImage(file="undo.png")
@@ -87,8 +87,8 @@ class Window:
         self.helpMenu.add_command(label="    About   ", command=self.about)
         self.menuBar.add_cascade(label="   Help   ", menu=self.helpMenu)
 
-        # Tool Bar
-        # Font
+        ## Tool Bar
+        ## Font
         self.toolBar = Label(self.window)
         self.toolBar.pack(side=TOP, fill=X)
         self.fontFamilies = font.families()
@@ -96,28 +96,28 @@ class Window:
         self.fontFamily_combobox = Combobox(self.toolBar, width=30, values=self.fontFamilies, state='readonly', textvariable=self.fontFamily_variable)
         self.fontFamily_combobox.current(self.fontFamilies.index('Arial'))
         self.fontFamily_combobox.grid(row=0, column=0, padx=5)
-        # Font Size
+        ## Font Size
         self.fontSize_variable = IntVar
         self.fontSize_combobox = Combobox(self.toolBar, width=14, textvariable=self.fontSize_variable, state='readonly', values=tuple(range(8,80)))
         self.fontSize_combobox.current(4)
         self.fontSize_combobox.grid(row=0, column=1, padx=5)
-        # Bold Button
+        ## Bold Button
         self.boldImage = PhotoImage(file='bold.png')
         self.boldButton = Button(self.toolBar, image=self.boldImage)
         self.boldButton.grid(row=0, column=2, padx=5)
-        # Italic Button
+        ## Italic Button
         self.italicImage = PhotoImage(file='italic.png')
         self.italicButton = Button(self.toolBar, image=self.italicImage)
         self.italicButton.grid(row=0, column=3, padx=5)
-        # Underline Button
+        ## Underline Button
         self.underlineImage = PhotoImage(file='underline.png')
         self.underlineButton = Button(self.toolBar, image=self.underlineImage)
         self.underlineButton.grid(row=0, column=4, padx=5)
-        # Text Color
+        ## Text Color
         self.colorImage = PhotoImage(file='color2.png')
         self.colorButton = Button(self.toolBar, image=self.colorImage)
         self.colorButton.grid(row=0, column=5, padx=5)
-        # Text Alignment
+        ## Text Alignment
         self.leftAlignImage = PhotoImage(file='alignleft.png')
         self.rightAlignImage = PhotoImage(file='alignright.png')
         self.centerAlignImage = PhotoImage(file='aligncenter.png')
