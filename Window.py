@@ -125,12 +125,12 @@ class Window:
         self.leftAlignImage = PhotoImage(file='alignleft.png')
         self.rightAlignImage = PhotoImage(file='alignright.png')
         self.centerAlignImage = PhotoImage(file='aligncenter.png')
-        self.leftAlignButton = Button(self.toolBar, image=self.leftAlignImage)
-        self.rightAlignButton = Button(self.toolBar, image=self.rightAlignImage)
-        self.centerAlignButton = Button(self.toolBar, image=self.centerAlignImage)
+        self.leftAlignButton = Button(self.toolBar, image=self.leftAlignImage, command=self.leftAlignText)
+        self.rightAlignButton = Button(self.toolBar, image=self.rightAlignImage, command=self.rightAlignText)
+        self.centerAlignButton = Button(self.toolBar, image=self.centerAlignImage, command=self.centerText)
         self.leftAlignButton.grid(row=0, column=6, padx=5)
-        self.rightAlignButton.grid(row=0, column=7, padx=5)
-        self.centerAlignButton.grid(row=0, column=8, padx=5)
+        self.rightAlignButton.grid(row=0, column=8, padx=5)
+        self.centerAlignButton.grid(row=0, column=7, padx=5)
         # Initialisation Of Stack Objects By Original state i.e if the file contains data, it is the Original state of
         # that file
         self.UStack = Stack(self.TextBox.get("1.0", "end-1c"))
@@ -376,3 +376,24 @@ class Window:
     def colorText(self):
         color = colorchooser.askcolor()
         self.TextBox.config(fg=color[1])
+
+    ## 22. Left Align Text Feature
+    def leftAlignText(self):
+        data = self.TextBox.get(0.0, END)
+        self.TextBox.tag_config('left', justify=LEFT)
+        self.TextBox.delete(0.0, END)
+        self.TextBox.insert(INSERT, data, 'left')
+
+    ## 23. Right Align Text Feature
+    def rightAlignText(self):
+        data = self.TextBox.get(0.0, END)
+        self.TextBox.tag_config('right', justify=RIGHT)
+        self.TextBox.delete(0.0, END)
+        self.TextBox.insert(INSERT, data, 'right')
+
+    ## 24. Center Text Feature
+    def centerText(self):
+        data = self.TextBox.get(0.0, END)
+        self.TextBox.tag_config('center', justify=CENTER)
+        self.TextBox.delete(0.0, END)
+        self.TextBox.insert(INSERT, data, 'center')
