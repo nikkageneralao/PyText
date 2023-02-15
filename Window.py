@@ -34,6 +34,11 @@ class Window:
         self.TextBox = Text(self.window, highlightthickness=0, font=("Arial", 12), yscrollcommand=self.scrollBar.set)
         self.scrollBar.config(command=self.TextBox.yview)
 
+        ## Status Bar
+        self.statusBar=Label(self.window, text='Status Bar')
+        self.statusBar.pack(side=BOTTOM)
+        self.TextBox.bind('<<Modified>>', self.status_Bar)
+
         # Initialisation of MenuBar
         self.menuBar = Menu(self.window, bg="#eeeeee", font=("Helvetica", 13), borderwidth=0)
         self.window.config(menu=self.menuBar)
@@ -298,7 +303,7 @@ class Window:
     def on_closing(self):
         if self.isFileOpen and self.isFileChange:
             self.save_file(self.File)
-        self._quit()
+        self.window.quit()
 
     # 11. Quit or Exit Function to exit from Text-Editor
     def _quit(self):
@@ -409,3 +414,12 @@ class Window:
         self.TextBox.tag_config('center', justify=CENTER)
         self.TextBox.delete(0.0, END)
         self.TextBox.insert(INSERT, data, 'center')
+
+    ## 25. Status Bar Feature
+    def status_Bar(self, event):
+        if self.TextBox.edit_modified():
+            words = len(self.TextBox.get(0.0, END).split())
+            characters = len(self.TextBox.get(0.0, 'end-1c').replace(' ', ''))
+            self.statusBar.config(text=f'Characters: {characters} Words: {words}')
+        self.TextBox.edit_modified(False)
+
