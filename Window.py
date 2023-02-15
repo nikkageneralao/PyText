@@ -111,7 +111,7 @@ class Window:
         self.boldButton.grid(row=0, column=2, padx=5)
         ## Italic Button
         self.italicImage = PhotoImage(file='italic.png')
-        self.italicButton = Button(self.toolBar, image=self.italicImage)
+        self.italicButton = Button(self.toolBar, image=self.italicImage, command=self.italicText)
         self.italicButton.grid(row=0, column=3, padx=5)
         ## Underline Button
         self.underlineImage = PhotoImage(file='underline.png')
@@ -354,4 +354,12 @@ class Window:
         if self.textProperty['weight'] == 'bold':
             self.TextBox.config(font=(self.fontStyle, self.fontSize, 'normal'))
 
+    ## 19. Italic Text Feature
+    def italicText(self):
+        self.textProperty = font.Font(font=self.TextBox['font']).actual()
+        if self.textProperty['slant'] == 'roman':
+            self.TextBox.config(font=(self.fontStyle, self.fontSize, 'italic'))
+
+        if self.textProperty['slant'] == 'italic':
+            self.TextBox.config(font=(self.fontStyle, self.fontSize, 'roman'))
 
