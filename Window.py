@@ -115,7 +115,7 @@ class Window:
         self.italicButton.grid(row=0, column=3, padx=5)
         ## Underline Button
         self.underlineImage = PhotoImage(file='underline.png')
-        self.underlineButton = Button(self.toolBar, image=self.underlineImage)
+        self.underlineButton = Button(self.toolBar, image=self.underlineImage, command=self.underlineText)
         self.underlineButton.grid(row=0, column=4, padx=5)
         ## Text Color
         self.colorImage = PhotoImage(file='color2.png')
@@ -363,3 +363,11 @@ class Window:
         if self.textProperty['slant'] == 'italic':
             self.TextBox.config(font=(self.fontStyle, self.fontSize, 'roman'))
 
+    ## 20. Underline Text Feature
+    def underlineText(self):
+        self.textProperty = font.Font(font=self.TextBox['font']).actual()
+        if self.textProperty['underline'] == 0:
+            self.TextBox.config(font=(self.fontStyle, self.fontSize, 'underline'))
+
+        if self.textProperty['underline'] == 1:
+            self.TextBox.config(font=(self.fontStyle, self.fontSize))
