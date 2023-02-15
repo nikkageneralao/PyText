@@ -4,7 +4,7 @@ from tkinter import filedialog as fd
 from Stack import *
 from tkinter.ttk import *
 from tkinter import font
-
+from tkinter import font,colorchooser
 
 #  Class Window is used for managing all the operations in TextEditor
 class Window:
@@ -119,7 +119,7 @@ class Window:
         self.underlineButton.grid(row=0, column=4, padx=5)
         ## Text Color
         self.colorImage = PhotoImage(file='color2.png')
-        self.colorButton = Button(self.toolBar, image=self.colorImage)
+        self.colorButton = Button(self.toolBar, image=self.colorImage, command=self.colorText)
         self.colorButton.grid(row=0, column=5, padx=5)
         ## Text Alignment
         self.leftAlignImage = PhotoImage(file='alignleft.png')
@@ -371,3 +371,8 @@ class Window:
 
         if self.textProperty['underline'] == 1:
             self.TextBox.config(font=(self.fontStyle, self.fontSize))
+
+    ## 21. Text Color Feature
+    def colorText(self):
+        color = colorchooser.askcolor()
+        self.TextBox.config(fg=color[1])
