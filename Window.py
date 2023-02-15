@@ -1,3 +1,4 @@
+import os.path
 from tkinter import *
 from tkinter import messagebox as message
 from tkinter import filedialog as fd
@@ -42,10 +43,12 @@ class Window:
         self.newImage = PhotoImage(file="new.png")
         self.openImage = PhotoImage(file="open.png")
         self.saveImage = PhotoImage(file="save.png")
+        self.saveasImage = PhotoImage(file="saveas.png")
         self.exit = PhotoImage(file="exit.png")
         self.fileMenu.add_command(label=" New", accelerator="Ctrl+N", image=self.newImage, compound=LEFT, command=self.new_file)
         self.fileMenu.add_command(label=" Open", accelerator="Ctrl+O", image=self.openImage, compound=LEFT, command=self.open_file)
         self.fileMenu.add_command(label=" Save", accelerator="Ctrl+S", image=self.saveImage, compound=LEFT, command=self.retrieve_input)
+        self.fileMenu.add_command(label=" Save As", accelerator="Ctrl+Alt+S", image=self.saveasImage, compound=LEFT, command=self.saveas_file)
         self.fileMenu.add_separator()
         self.fileMenu.add_command(label=" Exit", accelerator="Ctrl+D", image=self.exit, compound=LEFT, command=self._quit)
         self.menuBar.add_cascade(label="    File    ", menu=self.fileMenu)
@@ -165,6 +168,7 @@ class Window:
 
     # 2. Open a file which opens a file in editing mode
     def open_file(self):
+        global filename
         self.TextBox.config(state=NORMAL)
         if self.isFileOpen and self.isFileChange:
             self.save_file(self.File)
@@ -175,7 +179,7 @@ class Window:
             text = outfile.read()
             self.TextBox.delete('1.0', END)
             self.TextBox.insert(END, text)
-            self.window.wm_title(filename)
+            self.window.wm_title(os.path.basename(filename))
             self.isFileOpen = True
             self.File = filename
 
@@ -195,6 +199,12 @@ class Window:
             else:
                 self.write_file(file)
 
+    # 3.1 Save as file
+    def saveas_file(self):
+        saveFile = fd.asksaveasfile(filetypes=self.fileTypes, defaultextension=".txt")
+        content = self.TextBox.get(0.0, END)
+        saveFile.write(content)
+        saveFile.close()
     # 4. Save new file -> this function is for saving the new file
     def save_new_file(self, result):
         self.isFileChange = False
@@ -292,6 +302,8 @@ class Window:
 
     # 11. Quit or Exit Function to exit from Text-Editor
     def _quit(self):
+        if self.isFileOpen and self.isFileChange:
+            self.save_file(self.File)
         self.window.quit()
         self.window.destroy()
 
