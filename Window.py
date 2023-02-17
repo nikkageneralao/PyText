@@ -84,9 +84,16 @@ class Window:
         self.menuBar.add_cascade(label="    Edit    ", menu=self.editMenu)
 
         # View Menu
+        self.showToolBar = BooleanVar()
+        self.showStatusBar = BooleanVar()
+        self.toolbarImage = PhotoImage(file="toolbar.png")
+        self.statusbarImage = PhotoImage(file="statusbar.png")
         self.viewMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2,
                              font="Helvetica", )
-        self.viewMenu.add_command(label="   Change Mode   ", command=self.change_color)
+        self.viewMenu.add_checkbutton(label=" Tool Bar ", variable=self.showToolBar, onvalue=True, offvalue=False, image=self.toolbarImage, compound=LEFT, command=self.ToolBarFunc)
+        self.showToolBar.set(True)
+        self.viewMenu.add_checkbutton(label=" Status Bar ", variable=self.showStatusBar, onvalue=True, offvalue=False, image=self.statusbarImage, compound=LEFT, command=self.StatusBarFunc)
+        self.showStatusBar.set(True)
         self.menuBar.add_cascade(label="   View   ", menu=self.viewMenu)
 
         # Help Menu
@@ -314,16 +321,16 @@ class Window:
         self.window.destroy()
 
     # 12. Night mode view by changing the color of Text widget
-    def change_color(self):
+    #def change_color(self):
 
-        if self.mode == "normal":
-            self.mode = "dark"
-            self.TextBox.configure(background="#2f2b2b", foreground="#BDBDBD", font=("Helvetica", 14),
-                                   insertbackground="white")
-        else:
-            self.mode = "normal"
-            self.TextBox.configure(background="white", foreground="black", font=("Helvetica", 14),
-                                   insertbackground="black")
+    #    if self.mode == "normal":
+    #        self.mode = "dark"
+    #        self.TextBox.configure(background="#2f2b2b", foreground="#BDBDBD", font=("Helvetica", 14),
+    #                               insertbackground="white")
+    #    else:
+    #        self.mode = "normal"
+    #        self.TextBox.configure(background="white", foreground="black", font=("Helvetica", 14),
+    #                               insertbackground="black")
 
     # 13. About
     def about(self):
@@ -482,3 +489,19 @@ class Window:
 
         self.find1.protocol('WM_DELETE_WINDOW', closeWindow)
         self.find1.mainloop()
+
+    ## 27. View Menu
+    def ToolBarFunc(self):
+        if self.showToolBar.get()==False:
+            self.toolBar.pack_forget()
+        if self.showToolBar.get() == True:
+            self.TextBox.pack_forget()
+            self.toolBar.pack(fill=X)
+            self.TextBox.pack(fill=BOTH, expand=1)
+
+    def StatusBarFunc(self):
+        if self.showStatusBar.get()==False:
+            self.statusBar.pack_forget()
+        else:
+            self.statusBar.pack()
+
