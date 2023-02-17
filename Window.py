@@ -79,7 +79,7 @@ class Window:
         self.editMenu.add_separator()
         self.editMenu.add_command(label=" Select All", accelerator="Ctrl+A", image=self.selectImage, compound=LEFT)
         self.editMenu.add_command(label=" Clear", accelerator="Ctrl+Alt+X", image=self.clearImage, compound=LEFT)
-        self.editMenu.add_command(label=" Find", accelerator="Ctrl+F", image=self.findImage, compound=LEFT)
+        self.editMenu.add_command(label=" Find", accelerator="Ctrl+F", image=self.findImage, compound=LEFT, command=self.findText)
         self.editMenu.add_command(label=" Time/Date", accelerator="Ctrl+D", image=self.timedateImage, compound=LEFT)
         self.menuBar.add_cascade(label="    Edit    ", menu=self.editMenu)
 
@@ -304,6 +304,7 @@ class Window:
         if self.isFileOpen and self.isFileChange:
             self.save_file(self.File)
         self.window.quit()
+        self.window.destroy()
 
     # 11. Quit or Exit Function to exit from Text-Editor
     def _quit(self):
@@ -423,3 +424,31 @@ class Window:
             self.statusBar.config(text=f'Characters: {characters} Words: {words}')
         self.TextBox.edit_modified(False)
 
+    ## 26.
+    def findText(self):
+        self.find1 = Toplevel()
+
+        self.find1.title('Find')
+        self.find1.geometry('450x250+500+200')
+        self.find1.resizable(0,0)
+
+        self.labelFrame = LabelFrame(self.find1, text='Find/Replace')
+        self.labelFrame.pack(pady=50)
+
+        self.findLabel = Label(self.labelFrame, text='Find')
+        self.findLabel.grid(row=0, column=0, padx=5, pady=5)
+        self.findEntryField = Entry(self.labelFrame)
+        self.findEntryField.grid(row=0, column=1, padx=5, pady=5)
+
+        self.replaceLabel = Label(self.labelFrame, text='Replace')
+        self.replaceLabel.grid(row=1, column=0, padx=5, pady=5)
+        self.replaceEntryField = Entry(self.labelFrame)
+        self.replaceEntryField.grid(row=1, column=1, padx=5, pady=5)
+
+        self.findButton = Button(self.labelFrame, text='FIND', command=findWord)
+        self.findButton.grid(row=2, column=0, padx=5, pady=5)
+
+        self.replaceButton = Button(self.labelFrame, text='REPLACE', command=self.replaceText)
+        self.replaceButton.grid(row=2, column=1, padx=5, pady=5)
+
+        self.find1.mainloop()
