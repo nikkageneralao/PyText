@@ -96,6 +96,35 @@ class Window:
         self.showStatusBar.set(True)
         self.menuBar.add_cascade(label="   View   ", menu=self.viewMenu)
 
+        ## Themes Menu
+        self.themesMenu = Menu(self.menuBar, tearoff=False)
+        self.defaultImage = PhotoImage(file='white.png')
+        self.darkImage = PhotoImage(file='dark.png')
+        self.yellowImage = PhotoImage(file='yellow.png')
+        self.dwhiteImage = PhotoImage(file='dwhite.png')
+        self.pinkImage = PhotoImage(file='pink.png')
+        self.greenImage = PhotoImage(file='green.png')
+        self.blueImage = PhotoImage(file='blue.png')
+        self.redImage = PhotoImage(file='red.png')
+        self.themeChoice = StringVar()
+        self.themesMenu.add_radiobutton(label='  Default/White', image=self.defaultImage, variable=self.themeChoice, compound=LEFT
+                                        , command=lambda: self.changeColor('white', 'black'))
+        self.themesMenu.add_radiobutton(label='  Dark', image=self.darkImage, variable=self.themeChoice, compound=LEFT
+                                        , command=lambda: self.changeColor('black', 'white'))
+        self.themesMenu.add_radiobutton(label='  Yellow', image=self.yellowImage, variable=self.themeChoice, compound=LEFT
+                                        , command=lambda: self.changeColor('#FCF9BE', 'black'))
+        self.themesMenu.add_radiobutton(label='  Dirty White', image=self.dwhiteImage, variable=self.themeChoice, compound=LEFT
+                                        , command=lambda: self.changeColor('#F5EBE0', 'black'))
+        self.themesMenu.add_radiobutton(label='  Pink', image=self.pinkImage, variable=self.themeChoice, compound=LEFT
+                                        , command=lambda: self.changeColor('#FFC4E1', 'black'))
+        self.themesMenu.add_radiobutton(label='  Green', image=self.greenImage, variable=self.themeChoice, compound=LEFT
+                                        , command=lambda: self.changeColor('#E1F1DD', 'black'))
+        self.themesMenu.add_radiobutton(label='  Blue', image=self.blueImage, variable=self.themeChoice, compound=LEFT
+                                        , command=lambda: self.changeColor('#B2C8DF', 'black'))
+        self.themesMenu.add_radiobutton(label='  Red', image=self.redImage, variable=self.themeChoice, compound=LEFT
+                                        , command=lambda: self.changeColor('#FF9F9F', 'black'))
+        self.menuBar.add_cascade(label='   Themes   ', menu=self.themesMenu)
+
         # Help Menu
         self.helpMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2,
                              font="Helvetica", )
@@ -320,17 +349,9 @@ class Window:
         self.window.quit()
         self.window.destroy()
 
-    # 12. Night mode view by changing the color of Text widget
-    #def change_color(self):
-
-    #    if self.mode == "normal":
-    #        self.mode = "dark"
-    #        self.TextBox.configure(background="#2f2b2b", foreground="#BDBDBD", font=("Helvetica", 14),
-    #                               insertbackground="white")
-    #    else:
-    #        self.mode = "normal"
-    #        self.TextBox.configure(background="white", foreground="black", font=("Helvetica", 14),
-    #                               insertbackground="black")
+    ## 12. Color Theme
+    def changeColor(self, bg_color, fg_color):
+        self.TextBox.config(bg=bg_color, fg=fg_color)
 
     # 13. About
     def about(self):
@@ -431,7 +452,7 @@ class Window:
             self.statusBar.config(text=f'Characters: {characters} Words: {words}')
         self.TextBox.edit_modified(False)
 
-    ## 26.
+    ## 26. Find Feature
     def findText(self):
 
         def findWord():
