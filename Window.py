@@ -6,6 +6,7 @@ from Stack import *
 from tkinter.ttk import *
 from tkinter import font
 from tkinter import font,colorchooser
+import tempfile
 
 #  Class Window is used for managing all the operations in TextEditor
 class Window:
@@ -49,11 +50,13 @@ class Window:
         self.openImage = PhotoImage(file="open.png")
         self.saveImage = PhotoImage(file="save.png")
         self.saveasImage = PhotoImage(file="saveas.png")
+        self.printImage = PhotoImage(file="print.png")
         self.exit = PhotoImage(file="exit.png")
         self.fileMenu.add_command(label=" New", accelerator="Ctrl+N", image=self.newImage, compound=LEFT, command=self.new_file)
         self.fileMenu.add_command(label=" Open", accelerator="Ctrl+O", image=self.openImage, compound=LEFT, command=self.open_file)
         self.fileMenu.add_command(label=" Save", accelerator="Ctrl+S", image=self.saveImage, compound=LEFT, command=self.retrieve_input)
         self.fileMenu.add_command(label=" Save As", accelerator="Ctrl+Alt+S", image=self.saveasImage, compound=LEFT, command=self.saveas_file)
+        self.fileMenu.add_command(label=" Print", accelerator="Ctrl+P", image=self.printImage, compound=LEFT, command=self.printFile)
         self.fileMenu.add_separator()
         self.fileMenu.add_command(label=" Exit", accelerator="Ctrl+D", image=self.exit, compound=LEFT, command=self._quit)
         self.menuBar.add_cascade(label="    File    ", menu=self.fileMenu)
@@ -179,6 +182,7 @@ class Window:
         self.window.bind("<Control-f>", self.findText)
         self.window.bind("<Control-d>", self._quit)
         self.window.bind("<Control-Alt-s>", self.saveas_file)
+        self.window.bind("<Control-p>", self.printFile)
 
         # Initialisation Of Stack Objects By Original state i.e if the file contains data, it is the Original state of
         # that file
@@ -540,3 +544,8 @@ class Window:
         else:
             self.statusBar.pack()
 
+    ## 28. Print Feature
+    def printFile(self, event=None):
+        file = tempfile.mktemp('.doc')
+        open(file, 'w').write(self.TextBox.get(1.0, END))
+        os.startfile(file, 'print')
