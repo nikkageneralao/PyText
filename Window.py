@@ -426,6 +426,31 @@ class Window:
 
     ## 26.
     def findText(self):
+
+        def findWord():
+            self.TextBox.tag_remove('match', 1.0, END)
+            start_pos = '1.0'
+            word = self.findEntryField.get()
+            if word:
+                while True:
+                    start_pos = self.TextBox.search(word, start_pos, stopindex=END)
+                    if not start_pos:
+                        break
+                    end_pos = f'{start_pos} + {len(word)}c'
+                    self.TextBox.tag_add('match', start_pos, end_pos)
+
+                    self.TextBox.tag_config('match', foreground='red', background='yellow')
+                    start_pos = end_pos
+
+        def replaceText():
+            word = self.findEntryField.get()
+            replaceword = self.replaceEntryField.get()
+            content = self.TextBox.get(1.0, END)
+            newContent = content.replace(word, replaceword)
+            self.TextBox.delete(1.0, END)
+            self.TextBox.insert(1.0, newContent)
+
+
         self.find1 = Toplevel()
 
         self.find1.title('Find')
@@ -448,7 +473,12 @@ class Window:
         self.findButton = Button(self.labelFrame, text='FIND', command=findWord)
         self.findButton.grid(row=2, column=0, padx=5, pady=5)
 
-        self.replaceButton = Button(self.labelFrame, text='REPLACE', command=self.replaceText)
+        self.replaceButton = Button(self.labelFrame, text='REPLACE', command=replaceText)
         self.replaceButton.grid(row=2, column=1, padx=5, pady=5)
 
+        def closeWindow():
+            self.TextBox.tag_remove('match', 1.0, END)
+            self.find1.destroy()
+
+        self.find1.protocol('WM_DELETE_WINDOW', closeWindow)
         self.find1.mainloop()
