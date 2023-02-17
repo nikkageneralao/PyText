@@ -7,6 +7,7 @@ from tkinter.ttk import *
 from tkinter import font
 from tkinter import font,colorchooser
 import tempfile
+from datetime import datetime
 
 #  Class Window is used for managing all the operations in TextEditor
 class Window:
@@ -83,7 +84,7 @@ class Window:
         self.editMenu.add_command(label=" Select All", accelerator="Ctrl+A", image=self.selectImage, compound=LEFT)
         self.editMenu.add_command(label=" Clear", accelerator="Ctrl+Alt+X", image=self.clearImage, compound=LEFT)
         self.editMenu.add_command(label=" Find", accelerator="Ctrl+F", image=self.findImage, compound=LEFT, command=self.findText)
-        self.editMenu.add_command(label=" Time/Date", accelerator="Ctrl+D", image=self.timedateImage, compound=LEFT)
+        self.editMenu.add_command(label=" Time/Date", accelerator="Ctrl+D", image=self.timedateImage, compound=LEFT, command=self.timeDate)
         self.menuBar.add_cascade(label="    Edit    ", menu=self.editMenu)
 
         # View Menu
@@ -183,6 +184,7 @@ class Window:
         self.window.bind("<Control-d>", self._quit)
         self.window.bind("<Control-Alt-s>", self.saveas_file)
         self.window.bind("<Control-p>", self.printFile)
+        self.window.bind("<Control-d>", self.timeDate)
 
         # Initialisation Of Stack Objects By Original state i.e if the file contains data, it is the Original state of
         # that file
@@ -549,3 +551,9 @@ class Window:
         file = tempfile.mktemp('.doc')
         open(file, 'w').write(self.TextBox.get(1.0, END))
         os.startfile(file, 'print')
+
+    ## 29. Date and Time Feature
+    def timeDate(self, event=None):
+        dateTime = datetime.now()
+        formatDT = dateTime.strftime('%H:%M %p %B %d, %Y %A')
+        self.TextBox.insert(1.0, formatDT)
