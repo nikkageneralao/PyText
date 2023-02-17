@@ -175,6 +175,11 @@ class Window:
         self.leftAlignButton.grid(row=0, column=6, padx=5)
         self.rightAlignButton.grid(row=0, column=8, padx=5)
         self.centerAlignButton.grid(row=0, column=7, padx=5)
+        ## Controls
+        self.window.bind("<Control-f>", self.findText)
+        self.window.bind("<Control-d>", self._quit)
+        self.window.bind("<Control-Alt-s>", self.saveas_file)
+
         # Initialisation Of Stack Objects By Original state i.e if the file contains data, it is the Original state of
         # that file
         self.UStack = Stack(self.TextBox.get("1.0", "end-1c"))
@@ -229,30 +234,39 @@ class Window:
             self.UStack.add(self.TextBox.get("1.0", "end-1c"))
 
     # 3. Save file
-    def save_file(self, file):
+    def save_file(self, file, event):
         result = message.askquestion('Window Title', 'Do You Want to Save Changes')
         if result == "yes":
             if len(file) == 0:
                 saveFile = fd.asksaveasfile(filetypes=self.fileTypes, defaultextension=".txt")
-                print(saveFile.name)
-                self.write_file(saveFile.name)
-                self.TextBox.delete('1.0', END)
+                if saveFile is None:
+                    pass
+                else:
+                    print(saveFile.name)
+                    self.write_file(saveFile.name)
+                    self.TextBox.delete('1.0', END)
             else:
                 self.write_file(file)
 
     # 3.1 Save as file
-    def saveas_file(self):
+    def saveas_file(self, event):
         saveFile = fd.asksaveasfile(filetypes=self.fileTypes, defaultextension=".txt")
-        content = self.TextBox.get(0.0, END)
-        saveFile.write(content)
-        saveFile.close()
+        if saveFile is None:
+            pass
+        else:
+            content = self.TextBox.get(0.0, END)
+            saveFile.write(content)
+            saveFile.close()
     # 4. Save new file -> this function is for saving the new file
     def save_new_file(self, result):
         self.isFileChange = False
         if result == "yes":
             saveFile = fd.asksaveasfile(filetypes=self.fileTypes, defaultextension=".txt")
-            self.write_file(saveFile.name)
-            self.File = saveFile.name
+            if saveFile is None:
+                pass
+            else:
+                self.write_file(saveFile.name)
+                self.File = saveFile.name
         else:
             self.TextBox.delete('1.0', END)
 
@@ -343,7 +357,7 @@ class Window:
         self.window.destroy()
 
     # 11. Quit or Exit Function to exit from Text-Editor
-    def _quit(self):
+    def _quit(self, event):
         if self.isFileOpen and self.isFileChange:
             self.save_file(self.File)
         self.window.quit()
@@ -453,7 +467,7 @@ class Window:
         self.TextBox.edit_modified(False)
 
     ## 26. Find Feature
-    def findText(self):
+    def findText(self, event):
 
         def findWord():
             self.TextBox.tag_remove('match', 1.0, END)
