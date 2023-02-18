@@ -1,19 +1,37 @@
- Hi,
+Hi,
 
- This Text Editor is developed by using Python and Python modules like tkinter and Window. The Following are the functionality of the text editor.
+PyText is a Text Editor developed using Python and Python modules like tkinter and Window. The following are the features of this text editor.
 
-        * It supports the basic text operations like Cut, Copy, Paste, Undo, Redo, and also basic file operations like New, Save, and Open.
-        * It has Night-mode feature to work in low light.
-        * It has the power of unlimited Undo and Redo operations.
-        * It supports almost all types of files.
+	*  Basic text operations like Cut, Copy, Paste, Undo, Redo, Select All, Clear.
+	*  Basic file operations like New, Open, Save, Save As, and Print.
+	*  Supports almost all types of files.
+	*  Toolbar that contains Font, Font Size, Bold, Italic, Underline, Text Color, and Text Alignment.
+	*  Status Bar that shows the characters and word count.
+	*  View Menu that hide and unhide the toolbar and status bar.
+	*  Themes Menu that contains different colors for the text area.
+	*  Find menu that find and replace words.
+	*  Time/Date that insert the current time and date.
 
- You can perform the following operations:
+You can perform the following operations:
 
-        * New File - Ctrl+N
-        * Open File - Ctrl+O
-        * Save File - Ctrl+S
-        * Undo - Ctrl+Z
-        * Redo - Ctrl+Shift+Z
-        * Exit - Ctrl+X
+        	* New File - Ctrl+N
+        	* Open File - Ctrl+O
+        	* Save File - Ctrl+S
+	* Print - Ctrl+P
+        	* Exit - Ctrl+X
+	* Undo - Ctrl+Z
+        	* Redo - Ctrl+Shift+Z
+	
+	* Copy
+	* Paste
+	* Select All
+	* Clear
+	* Find
+	* Time/Date
+	*  Bold -
+	*  Italic -
+	*  Underline -
+	*  Align Left -
+	*  Center -
+	*  Align Right -
 
- For any queries feedback you can write me at piyushjain7024@gmail.com .....
