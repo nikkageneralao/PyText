@@ -14,24 +14,25 @@ PyText is a Text Editor developed using Python and Python modules like tkinter a
 
 You can perform the following operations:
 
-        	* New File - Ctrl+N
-        	* Open File - Ctrl+O
-        	* Save File - Ctrl+S
+	* New File - Ctrl+N
+	* Open File - Ctrl+O
+	* Save File - Ctrl+S
+	* Save As - Ctrl+Alt+S
 	* Print - Ctrl+P
-        	* Exit - Ctrl+X
+	* Exit - Ctrl+Q
 	* Undo - Ctrl+Z
-        	* Redo - Ctrl+Shift+Z
-	
-	* Copy
-	* Paste
-	* Select All
-	* Clear
-	* Find
-	* Time/Date
-	*  Bold -
-	*  Italic -
-	*  Underline -
-	*  Align Left -
-	*  Center -
-	*  Align Right -
+	* Redo - Ctrl+Y
+	* Cut - Ctrl+X
+	* Copy - Ctrl+C
+	* Paste - Ctrl+V
+	* Select All - Ctrl+A
+	* Clear - Ctrl+Alt+X
+	* Find - Ctrl+F
+	* Time/Date - Ctrl+D
+	*  Bold - Ctrl+B
+	*  Italic - Ctrl+I
+	*  Underline - Ctrl+U
+	*  Align Left - Ctrl+L
+	*  Center - Ctrl+E
+	*  Align Right - Ctrl+R
 
