@@ -59,7 +59,7 @@ class Window:
         self.fileMenu.add_command(label=" Save As", accelerator="Ctrl+Alt+S", image=self.saveasImage, compound=LEFT, command=self.saveas_file)
         self.fileMenu.add_command(label=" Print", accelerator="Ctrl+P", image=self.printImage, compound=LEFT, command=self.printFile)
         self.fileMenu.add_separator()
-        self.fileMenu.add_command(label=" Exit", accelerator="Ctrl+D", image=self.exit, compound=LEFT, command=self._quit)
+        self.fileMenu.add_command(label=" Exit", accelerator="Ctrl+Q", image=self.exit, compound=LEFT, command=self._quit)
         self.menuBar.add_cascade(label="    File    ", menu=self.fileMenu)
 
         ## Edit Menu (added icons images and the select, clear, find and time/date features)
@@ -75,7 +75,7 @@ class Window:
         self.findImage = PhotoImage(file="find.png")
         self.timedateImage = PhotoImage(file="timedate.png")
         self.editMenu.add_command(label=" Undo", accelerator="Ctrl+Z", image=self.undoImage, compound=LEFT,command=self.undo)
-        self.editMenu.add_command(label=" Redo", accelerator="Ctrl+Shift+Z", image=self.redoImage, compound=LEFT, command=self.redo)
+        self.editMenu.add_command(label=" Redo", accelerator="Ctrl+Y", image=self.redoImage, compound=LEFT, command=self.redo)
         self.editMenu.add_separator()
         self.editMenu.add_command(label=" Cut", accelerator="Ctrl+X", image=self.cutImage, compound=LEFT, command=self.cut)
         self.editMenu.add_command(label=" Copy", accelerator="Ctrl+C", image=self.copyImage, compound=LEFT, command=self.copy)
@@ -181,10 +181,16 @@ class Window:
         self.centerAlignButton.grid(row=0, column=7, padx=5)
         ## Controls
         self.window.bind("<Control-f>", self.findText)
-        self.window.bind("<Control-d>", self._quit)
+        self.window.bind("<Control-q>", self._quit)
         self.window.bind("<Control-Alt-s>", self.saveas_file)
         self.window.bind("<Control-p>", self.printFile)
         self.window.bind("<Control-d>", self.timeDate)
+        self.window.bind("<Control-b>", self.boldText)
+        self.window.bind("<Control-i>", self.italicText)
+        self.window.bind("<Control-u>", self.underlineText)
+        self.window.bind("<Control-l>", self.leftAlignText)
+        self.window.bind("<Control-e>", self.centerText)
+        self.window.bind("<Control-r>", self.rightAlignText)
 
         # Initialisation Of Stack Objects By Original state i.e if the file contains data, it is the Original state of
         # that file
@@ -193,7 +199,7 @@ class Window:
 
     #     Member Functions
     # 1. New File method which creates a new file
-    def new_file(self):
+    def new_file(self, event=None):
         self.TextBox.config(state=NORMAL)
         if self.isFileOpen:
             if len(self.File) > 0:
@@ -219,7 +225,7 @@ class Window:
             self.UStack.add(self.TextBox.get("1.0", "end-1c"))
 
     # 2. Open a file which opens a file in editing mode
-    def open_file(self):
+    def open_file(self, event=None):
         global filename
         self.TextBox.config(state=NORMAL)
         if self.isFileOpen and self.isFileChange:
@@ -240,7 +246,7 @@ class Window:
             self.UStack.add(self.TextBox.get("1.0", "end-1c"))
 
     # 3. Save file
-    def save_file(self, file, event):
+    def save_file(self, file, event=None):
         result = message.askquestion('Window Title', 'Do You Want to Save Changes')
         if result == "yes":
             if len(file) == 0:
@@ -255,7 +261,7 @@ class Window:
                 self.write_file(file)
 
     # 3.1 Save as file
-    def saveas_file(self, event):
+    def saveas_file(self, event=None):
         saveFile = fd.asksaveasfile(filetypes=self.fileTypes, defaultextension=".txt")
         if saveFile is None:
             pass
@@ -356,14 +362,14 @@ class Window:
             self.RStack.remove()
 
     # 10. Close the window (called when the close button at the right-top is clicked)
-    def on_closing(self):
+    def on_closing(self, event=None):
         if self.isFileOpen and self.isFileChange:
             self.save_file(self.File)
         self.window.quit()
         self.window.destroy()
 
     # 11. Quit or Exit Function to exit from Text-Editor
-    def _quit(self, event):
+    def _quit(self, event=None):
         if self.isFileOpen and self.isFileChange:
             self.save_file(self.File)
         self.window.quit()
@@ -381,13 +387,13 @@ class Window:
         self.TextBox.config(state=DISABLED)
 
     # 14. Copy
-    def copy(self):
+    def copy(self, event=None):
         self.TextBox.clipboard_clear()
         text = self.TextBox.get("sel.first", "sel.last")
         self.TextBox.clipboard_append(text)
 
     # 15. Cut
-    def cut(self):
+    def cut(self, event=None):
         self.copy()
         self.TextBox.delete("sel.first", "sel.last")
         self.UStack.add(self.TextBox.get("1.0", "end-1c"))
