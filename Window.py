@@ -132,7 +132,8 @@ class Window:
         # Help Menu
         self.helpMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2,
                              font="Helvetica", )
-        self.helpMenu.add_command(label="    About   ", command=self.about)
+        self.aboutImage = PhotoImage(file='about.png')
+        self.helpMenu.add_command(label=" About", image=self.aboutImage, compound=LEFT, command=self.about)
         self.menuBar.add_cascade(label="   Help   ", menu=self.helpMenu)
 
         ## Tool Bar
