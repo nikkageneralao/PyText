@@ -2,15 +2,14 @@ Hi,
 
 PyText is a Text Editor developed using Python and Python modules like tkinter and Window. The following are the features of this text editor.
 
-	*  Basic text operations like Cut, Copy, Paste, Undo, Redo, Select All, Clear.
+	*  Basic text operations like Cut, Copy, Paste, Undo, Redo, Select All, Clear, Find operation that find and replace words,
+	   and Time/Date that insert the current time and date.
 	*  Basic file operations like New, Open, Save, Save As, and Print.
 	*  Supports almost all types of files.
 	*  Toolbar that contains Font, Font Size, Bold, Italic, Underline, Text Color, and Text Alignment.
 	*  Status Bar that shows the characters and word count.
 	*  View Menu that hide and unhide the toolbar and status bar.
 	*  Themes Menu that contains different colors for the text area.
-	*  Find menu that find and replace words.
-	*  Time/Date that insert the current time and date.
 
 You can perform the following operations:
 
@@ -29,10 +28,10 @@ You can perform the following operations:
 	* Clear - Ctrl+Alt+X
 	* Find - Ctrl+F
 	* Time/Date - Ctrl+D
-	*  Bold - Ctrl+B
-	*  Italic - Ctrl+I
-	*  Underline - Ctrl+U
-	*  Align Left - Ctrl+L
-	*  Center - Ctrl+E
-	*  Align Right - Ctrl+R
+	* Bold - Ctrl+B
+	* Italic - Ctrl+I
+	* Underline - Ctrl+U
+	* Align Left - Ctrl+L
+	* Center - Ctrl+E
+	* Align Right - Ctrl+R
 

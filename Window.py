@@ -26,7 +26,7 @@ class Window:
         self.window = Tk()
         self.window.geometry("1200x700+20+20")
         self.window.wm_title("PyText")
-        p1 = PhotoImage(file='logo.png')
+        p1 = PhotoImage(file='icons/logo.png')
         self.window.iconphoto(False, p1)
 
         ## Scrollbar
@@ -47,12 +47,12 @@ class Window:
 
         ## File Menu (added icons images)
         self.fileMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2, font="Helvetica")
-        self.newImage = PhotoImage(file="new.png")
-        self.openImage = PhotoImage(file="open.png")
-        self.saveImage = PhotoImage(file="save.png")
-        self.saveasImage = PhotoImage(file="saveas.png")
-        self.printImage = PhotoImage(file="print.png")
-        self.exit = PhotoImage(file="exit.png")
+        self.newImage = PhotoImage(file="icons/new.png")
+        self.openImage = PhotoImage(file="icons/open.png")
+        self.saveImage = PhotoImage(file="icons/save.png")
+        self.saveasImage = PhotoImage(file="icons/saveas.png")
+        self.printImage = PhotoImage(file="icons/print.png")
+        self.exit = PhotoImage(file="icons/exit.png")
         self.fileMenu.add_command(label=" New", accelerator="Ctrl+N", image=self.newImage, compound=LEFT, command=self.new_file)
         self.fileMenu.add_command(label=" Open", accelerator="Ctrl+O", image=self.openImage, compound=LEFT, command=self.open_file)
         self.fileMenu.add_command(label=" Save", accelerator="Ctrl+S", image=self.saveImage, compound=LEFT, command=self.retrieve_input)
@@ -65,15 +65,15 @@ class Window:
         ## Edit Menu (added icons images and the select, clear, find and time/date features)
         self.editMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2,
                              font="Helvetica", )
-        self.undoImage = PhotoImage(file="undo.png")
-        self.redoImage = PhotoImage(file="redo.png")
-        self.cutImage = PhotoImage(file="cut.png")
-        self.copyImage = PhotoImage(file="copy.png")
-        self.pasteImage = PhotoImage(file="paste.png")
-        self.selectImage = PhotoImage(file="select.png")
-        self.clearImage = PhotoImage(file="clear.png")
-        self.findImage = PhotoImage(file="find.png")
-        self.timedateImage = PhotoImage(file="timedate.png")
+        self.undoImage = PhotoImage(file="icons/undo.png")
+        self.redoImage = PhotoImage(file="icons/redo.png")
+        self.cutImage = PhotoImage(file="icons/cut.png")
+        self.copyImage = PhotoImage(file="icons/copy.png")
+        self.pasteImage = PhotoImage(file="icons/paste.png")
+        self.selectImage = PhotoImage(file="icons/select.png")
+        self.clearImage = PhotoImage(file="icons/clear.png")
+        self.findImage = PhotoImage(file="icons/find.png")
+        self.timedateImage = PhotoImage(file="icons/timedate.png")
         self.editMenu.add_command(label=" Undo", accelerator="Ctrl+Z", image=self.undoImage, compound=LEFT,command=self.undo)
         self.editMenu.add_command(label=" Redo", accelerator="Ctrl+Y", image=self.redoImage, compound=LEFT, command=self.redo)
         self.editMenu.add_separator()
@@ -90,8 +90,8 @@ class Window:
         # View Menu
         self.showToolBar = BooleanVar()
         self.showStatusBar = BooleanVar()
-        self.toolbarImage = PhotoImage(file="toolbar.png")
-        self.statusbarImage = PhotoImage(file="statusbar.png")
+        self.toolbarImage = PhotoImage(file="icons/toolbar.png")
+        self.statusbarImage = PhotoImage(file="icons/statusbar.png")
         self.viewMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2,
                              font="Helvetica", )
         self.viewMenu.add_checkbutton(label=" Tool Bar ", variable=self.showToolBar, onvalue=True, offvalue=False, image=self.toolbarImage, compound=LEFT, command=self.ToolBarFunc)
@@ -102,14 +102,14 @@ class Window:
 
         ## Themes Menu
         self.themesMenu = Menu(self.menuBar, tearoff=False)
-        self.defaultImage = PhotoImage(file='white.png')
-        self.darkImage = PhotoImage(file='dark.png')
-        self.yellowImage = PhotoImage(file='yellow.png')
-        self.dwhiteImage = PhotoImage(file='dwhite.png')
-        self.pinkImage = PhotoImage(file='pink.png')
-        self.greenImage = PhotoImage(file='green.png')
-        self.blueImage = PhotoImage(file='blue.png')
-        self.redImage = PhotoImage(file='red.png')
+        self.defaultImage = PhotoImage(file='icons/white.png')
+        self.darkImage = PhotoImage(file='icons/dark.png')
+        self.yellowImage = PhotoImage(file='icons/yellow.png')
+        self.dwhiteImage = PhotoImage(file='icons/dwhite.png')
+        self.pinkImage = PhotoImage(file='icons/pink.png')
+        self.greenImage = PhotoImage(file='icons/green.png')
+        self.blueImage = PhotoImage(file='icons/blue.png')
+        self.redImage = PhotoImage(file='icons/red.png')
         self.themeChoice = StringVar()
         self.themesMenu.add_radiobutton(label='  Default/White', image=self.defaultImage, variable=self.themeChoice, compound=LEFT
                                         , command=lambda: self.changeColor('white', 'black'))
@@ -132,7 +132,7 @@ class Window:
         # Help Menu
         self.helpMenu = Menu(self.menuBar, tearoff=0, activebackground="#d5d5e2", bg="#eeeeee", bd=2,
                              font="Helvetica", )
-        self.aboutImage = PhotoImage(file='about.png')
+        self.aboutImage = PhotoImage(file='icons/about.png')
         self.helpMenu.add_command(label=" About", image=self.aboutImage, compound=LEFT, command=self.about)
         self.menuBar.add_cascade(label="   Help   ", menu=self.helpMenu)
 
@@ -155,25 +155,25 @@ class Window:
         ## Font Size Functionality
         self.fontSize_combobox.bind('<<ComboboxSelected>>', self.font_Size)
         ## Bold Button
-        self.boldImage = PhotoImage(file='bold.png')
+        self.boldImage = PhotoImage(file='icons/bold.png')
         self.boldButton = Button(self.toolBar, image=self.boldImage, command=self.boldText)
         self.boldButton.grid(row=0, column=2, padx=5)
         ## Italic Button
-        self.italicImage = PhotoImage(file='italic.png')
+        self.italicImage = PhotoImage(file='icons/italic.png')
         self.italicButton = Button(self.toolBar, image=self.italicImage, command=self.italicText)
         self.italicButton.grid(row=0, column=3, padx=5)
         ## Underline Button
-        self.underlineImage = PhotoImage(file='underline.png')
+        self.underlineImage = PhotoImage(file='icons/underline.png')
         self.underlineButton = Button(self.toolBar, image=self.underlineImage, command=self.underlineText)
         self.underlineButton.grid(row=0, column=4, padx=5)
         ## Text Color
-        self.colorImage = PhotoImage(file='color2.png')
+        self.colorImage = PhotoImage(file='icons/color2.png')
         self.colorButton = Button(self.toolBar, image=self.colorImage, command=self.colorText)
         self.colorButton.grid(row=0, column=5, padx=5)
         ## Text Alignment
-        self.leftAlignImage = PhotoImage(file='alignleft.png')
-        self.rightAlignImage = PhotoImage(file='alignright.png')
-        self.centerAlignImage = PhotoImage(file='aligncenter.png')
+        self.leftAlignImage = PhotoImage(file='icons/alignleft.png')
+        self.rightAlignImage = PhotoImage(file='icons/alignright.png')
+        self.centerAlignImage = PhotoImage(file='icons/aligncenter.png')
         self.leftAlignButton = Button(self.toolBar, image=self.leftAlignImage, command=self.leftAlignText)
         self.rightAlignButton = Button(self.toolBar, image=self.rightAlignImage, command=self.rightAlignText)
         self.centerAlignButton = Button(self.toolBar, image=self.centerAlignImage, command=self.centerText)
