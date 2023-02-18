@@ -2,7 +2,7 @@
 
 This is inspired by text editors like MS Word and Notepad. 
 Pytext can perform basic text operations like cut, copy and paste. It can also perform basic file operations like insert new file, open a file, save a file, and print. This text editor also contains a tool bar where you can select a font, font size, make a text bold, italic, or underlined, and text alignment. It also contains a status bar that provides character and word count. Pytext also has a view menu where you can choose to hide/unhide the toolbar and status bar, a themes menu to choose what color you want the text area to be. 
-![](icons/pytext.PNG)
+![](icons/pytext.png)
 
 # Features
 - Basic text operations like Cut, Copy, Paste, Undo, Redo, Select All, Clear Find operation that find and replace words, and Time/Date that insert the current time and date.
