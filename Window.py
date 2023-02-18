@@ -472,7 +472,7 @@ class Window:
         self.TextBox.insert(INSERT, data, 'center')
 
     ## 25. Status Bar Feature
-    def status_Bar(self, event):
+    def status_Bar(self, event=None):
         if self.TextBox.edit_modified():
             words = len(self.TextBox.get(0.0, END).split())
             characters = len(self.TextBox.get(0.0, 'end-1c').replace(' ', ''))
@@ -480,8 +480,7 @@ class Window:
         self.TextBox.edit_modified(False)
 
     ## 26. Find Feature
-    def findText(self, event):
-
+    def findText(self, event=None):
         def findWord():
             self.TextBox.tag_remove('match', 1.0, END)
             start_pos = '1.0'
