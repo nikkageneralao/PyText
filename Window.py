@@ -419,7 +419,7 @@ class Window:
         self.TextBox.config(font=(self.fontStyle, self.fontSize))
 
     ## 18. Bold Text Feature
-    def boldText(self):
+    def boldText(self, event=None):
         self.textProperty = font.Font(font=self.TextBox['font']).actual()
         if self.textProperty['weight'] == 'normal':
             self.TextBox.config(font=(self.fontStyle, self.fontSize, 'bold'))
@@ -428,7 +428,7 @@ class Window:
             self.TextBox.config(font=(self.fontStyle, self.fontSize, 'normal'))
 
     ## 19. Italic Text Feature
-    def italicText(self):
+    def italicText(self, event=None):
         self.textProperty = font.Font(font=self.TextBox['font']).actual()
         if self.textProperty['slant'] == 'roman':
             self.TextBox.config(font=(self.fontStyle, self.fontSize, 'italic'))
@@ -437,7 +437,7 @@ class Window:
             self.TextBox.config(font=(self.fontStyle, self.fontSize, 'roman'))
 
     ## 20. Underline Text Feature
-    def underlineText(self):
+    def underlineText(self, event=None):
         self.textProperty = font.Font(font=self.TextBox['font']).actual()
         if self.textProperty['underline'] == 0:
             self.TextBox.config(font=(self.fontStyle, self.fontSize, 'underline'))
@@ -451,21 +451,21 @@ class Window:
         self.TextBox.config(fg=color[1])
 
     ## 22. Left Align Text Feature
-    def leftAlignText(self):
+    def leftAlignText(self, event=None):
         data = self.TextBox.get(0.0, END)
         self.TextBox.tag_config('left', justify=LEFT)
         self.TextBox.delete(0.0, END)
         self.TextBox.insert(INSERT, data, 'left')
 
     ## 23. Right Align Text Feature
-    def rightAlignText(self):
+    def rightAlignText(self, event=None):
         data = self.TextBox.get(0.0, END)
         self.TextBox.tag_config('right', justify=RIGHT)
         self.TextBox.delete(0.0, END)
         self.TextBox.insert(INSERT, data, 'right')
 
     ## 24. Center Text Feature
-    def centerText(self):
+    def centerText(self, event=None):
         data = self.TextBox.get(0.0, END)
         self.TextBox.tag_config('center', justify=CENTER)
         self.TextBox.delete(0.0, END)
